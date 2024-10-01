@@ -8,7 +8,7 @@ const getHomePage = (req, res) => {
   //   res.send(JSON.stringify(users));
   // });
 
-  return res.render("home.ejs")
+  return res.render("home.ejs");
 };
 
 const getTestEjs = (req, res) => {
@@ -19,8 +19,27 @@ const getTestNodemon = (req, res) => {
   res.send("hello world with nodemon");
 };
 
+const postCreateUser = (req, res) => {
+  let email = req.body.email;
+  let name = req.body.name;
+  let city = req.body.city;
+  console.log(">>> email: ", email, " name: ", name, " city: ", city);
+  //send data to databa
+  connection.query(
+    `INSERT INTO
+    Users (email, name, city)
+    VALUES (?, ?, ?)`,
+    [email, name, city],
+    function (err, results) {
+      console.log(results);
+      res.send("created user succeed!")
+    }
+  );
+};
+
 module.exports = {
   getHomePage,
   getTestEjs,
   getTestNodemon,
+  postCreateUser,
 };

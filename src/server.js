@@ -7,6 +7,10 @@ const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./routes/web");
 // const connection = require("./config/database");
 
+//config req.body
+app.use(express.json()); // for json
+app.use(express.urlencoded({ extended: true })); // for form data
+
 //config template engine
 configViewEngine(app);
 //khai báo route
