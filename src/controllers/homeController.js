@@ -19,22 +19,22 @@ const getTestNodemon = (req, res) => {
   res.send("hello world with nodemon");
 };
 
-const postCreateUser = (req, res) => {
+const postCreateUser = async (req, res) => {
   let email = req.body.email;
   let name = req.body.name;
   let city = req.body.city;
   console.log(">>> email: ", email, " name: ", name, " city: ", city);
-  //send data to databa
-  connection.query(
-    `INSERT INTO
-    Users (email, name, city)
-    VALUES (?, ?, ?)`,
-    [email, name, city],
-    function (err, results) {
-      console.log(results);
-      res.send("created user succeed!")
-    }
+  //send data to database
+  let [results, fields] = await connection.query(
+    `INSERT INTO Users (email, name, city) VALUES (?, ?, ?)`,
+    [email, name, city]
   );
+  
+  res.send("create user succeed!");
+};
+
+const getCreatePage = (req, res) => {
+  res.render("create.ejs");
 };
 
 module.exports = {
@@ -42,4 +42,5 @@ module.exports = {
   getTestEjs,
   getTestNodemon,
   postCreateUser,
+  getCreatePage,
 };
