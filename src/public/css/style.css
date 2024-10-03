@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+a{
+  
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #333;
@@ -64,3 +68,9 @@ th, td {
 }
 
 tr:hover {background-color: #ccc;}
+
+.title{
+  font-size: 20px;
+  font-weight: 400;
+  color: #a41212;
+}
