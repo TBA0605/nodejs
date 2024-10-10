@@ -5,6 +5,13 @@ const getAllUsers = async () => {
   return results;
 };
 
+const createUser = async (email, name, city) => {
+  let [results, fields] = await connection.query(
+    `INSERT INTO Users (email, name, city) VALUES (?, ?, ?)`,
+    [email, name, city]
+  );
+};
+
 const getUserById = async (userId) => {
   let [results, fields] = await connection.query(
     "select * from Users where id = ?",
@@ -14,4 +21,26 @@ const getUserById = async (userId) => {
   return user;
 };
 
-module.exports = { getAllUsers, getUserById };
+const updateUserById = async (email, name, city, userId) => {
+  let [results, fields] = await connection.query(
+    ` UPDATE Users 
+      SET email = ?, name = ?, City= ?
+      WHERE id = ?;`,
+    [email, name, city, userId]
+  );
+};
+
+const deleteUserById = async (id) => {
+  let [results, fields] = await connection.query(
+    ` DELETE FROM Users WHERE id = ?;`,
+    [id]
+  );
+};
+
+module.exports = {
+  getAllUsers,
+  createUser,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+};

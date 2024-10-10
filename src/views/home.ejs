@@ -45,9 +45,11 @@
           <td><%= user.email %></td>
           <td><%= user.name %></td>
           <td><%= user.city %></td>
-          <td>
+          <td class="btn-group">
             <button><a href="/update/<%= user.id %>">Edit</a></button>
-            <button>Delete</button>
+            <form action="/delete-user/<%= user.id %>" method="POST">
+              <button>Delete</button>
+            </form>
           </td>
         </tr>
         <% }) %>
